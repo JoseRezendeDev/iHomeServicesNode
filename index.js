@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const port = 80;
 var i18n = require('i18n');
-const router = require('router');
+const db = require('./repository/dbConfig');
+
 
 i18n.configure({
     defaultLocale: "pt",
@@ -13,6 +14,8 @@ i18n.configure({
 });
 
 app.use(i18n.init);
+
+app.use("/", require("./router"));
 
 app.listen(port, () => {
     console.log("iHomeServices running on port ", port);

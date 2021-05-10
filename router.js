@@ -6,9 +6,12 @@ router.use(function timeLog(req, res, next) {
   console.log('Time: ', Date.now());
   next();
 });
+
 // define the home page route
-router.get('/cli', function(req, res) {
-  res.send('iHomeServices home page');
+router.get('/', function(req, res) {
+  res.send('Bem vindo ao iHomeServices');
 });
+
+router.use("/cliente", require('./controller/clienteController'));
 
 module.exports = router;
