@@ -3,7 +3,7 @@ var router = express.Router();
 const clienteService = require('../service/clienteService');
 
 router.get('/', (req, res) => {
-    console.log("getClientes chamado");
+    console.log("getClientes");
     const clientes = clienteService.getClientes();
     res.send(clientes);
 })

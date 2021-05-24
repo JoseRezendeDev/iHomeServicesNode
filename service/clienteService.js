@@ -1,8 +1,14 @@
 const clienteRepository = require('../repository/clienteRepository');
 
-const getClientes = () => {
+function getClientes() {
+    // clienteRepository.getClientes()
+    // .then(results => {
+    //     console.log("service", results);
+    //     return results;
+    // })
+    // .catch("getClientes falhou");
     let clientes = clienteRepository.getClientes();
-    console.log(clientes);
+    console.log("service", clientes);
     return clientes;
 }
 

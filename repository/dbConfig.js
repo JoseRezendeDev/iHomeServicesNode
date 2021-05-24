@@ -1,10 +1,30 @@
-async function connect(){
-    const mysql = require("mysql2/promise");
-    const connection = await mysql.createConnection("mysql://jose:jose123@localhost:3306/ihomeservices").
-    catch(console.log("não conectou"));
-    console.log("Conectou no MySQL!");
-    global.connection = connection;
-    return connection;
-}
+const mysql = require('mysql2');
 
-module.exports = connect();
+const conn = mysql.createConnection({
+    host: "localhost",
+    database: "ihomeservices",
+    user: "root",
+    password: "jose123"
+});
+
+// conn.connect(function(err) {
+//     if (err) {
+//         throw err;
+//     }
+//     console.log("conectou");
+// });
+
+// const connect = async () => {
+//     const mysql = require("mysql2/promise");
+//     const connection = await mysql
+//     .createConnection("mysql://root:jose123@localhost:3306/ihomeservices")
+//     .then(() => console.log("conectou"))
+//     .catch(e => {
+//         console.log("não conectou");
+//         console.log(e);
+//     });
+//     global.connection = connection;
+//     return connection;
+// };
+
+module.exports = conn;
