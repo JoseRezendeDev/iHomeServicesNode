@@ -1,0 +1,102 @@
+create database ihomeservices;
+use ihomeservices;
+
+create table cliente(
+    id int not null auto_increment,
+    nome varchar(50) not null,
+    rua varchar(50),
+    numero int,
+    cidade varchar(40),
+    constraint cliente_pk primary key (id),
+    constraint cliente_ck check (numero >= 0)
+);
+
+create table categoria(
+    id int not null auto_increment,
+    nome varchar(30),
+    constraint categoria_pk primary key (id),
+    constraint categoria_uk unique (nome)
+);
+
+create table prestador(
+    cpf varchar(11) not null,
+    nome varchar(50),
+    cidade varchar(40),
+    preco_dia int,
+    id_categoria int,
+    constraint prestador_pk primary key (cpf),
+    constraint prestador_categoria_fk foreign key (id_categoria) references categoria(id)
+);
+    
+create table telefone(
+    numero varchar(15) not null,
+    cpf_prestador varchar(11),
+    valido int default 1,
+    constraint telefone_pk primary key (numero, cpf_prestador),
+    constraint telefone_numero_uk unique(numero),
+    constraint telefone_cpf_fk foreign key (cpf_prestador) references prestador(cpf)
+);
+
+create table avaliacao(
+    id int not null auto_increment,
+    nota int,
+    comentario varchar(200),
+    constraint avaliacao_pk primary key (id),
+    constraint avaliacao_ck check (nota >= -1)
+);
+
+create table servico(
+    data date not null,
+    preco_total int,
+    id_cliente int not null,
+    cpf_prestador varchar(11) not null,
+    id_avaliacao int,
+    constraint servico_pk primary key (id_cliente, cpf_prestador, data),
+    constraint servico_cliente_fk foreign key (id_cliente) references cliente(id),
+    constraint servico_prestador_fk foreign key (cpf_prestador) references prestador(cpf),
+    constraint servico_avaliacao_fk foreign key (id_avaliacao) references avaliacao(id) on delete set null,
+    constraint servico_avaliacao_uk unique (id_avaliacao)
+);
+
+insert into cliente values (null, 'Caetano Veloso', 'Rua Veloso', 78, 'Salvador');
+insert into cliente values (null, 'Djavan', 'Rua Djavan', 128, 'São Paulo');
+insert into cliente values (null, 'Roberto Carlos', 'Rua Roberto Santos', 563, 'Vitória');
+insert into cliente values (null, 'Chico Buarque', 'Rua Holambra', 1964, 'Rio de Janeiro');
+insert into cliente values (null, 'Wanderlea', 'Rua Wander Leason', 284, 'Palmas');
+
+insert into categoria values (null, 'Pedreiro');
+insert into categoria values (null, 'Piscineiro');
+insert into categoria values (null, 'Manicure');
+insert into categoria values (null, 'Eletricista');
+insert into categoria values (null, 'Pintor');
+
+insert into prestador values ('11122233344', 'Lionel Ritchie', 'São Paulo', 150.00, 1);
+insert into prestador values ('99922233355', 'Maggie Macneal', 'São Paulo', 120.00, 1);
+insert into prestador values ('88822233366', 'Michael Jackson', 'Santos', 90.00, 2);
+insert into prestador values ('77722233377', 'Fred Mercury', 'São Paulo', 150, 3);
+insert into prestador values ('66622233388', 'Axl Rose', 'Guarujá', 150.00, 4);
+insert into prestador values ('99922233310', 'Bonnie Tyler', 'São Paulo', 120.00, 1);
+
+insert into telefone values ('11991223344', '11122233344', default);
+insert into telefone values ('16991223355', '11122233344', default); 
+insert into telefone values ('16991223366', '99922233355', default); 
+insert into telefone values ('16991223377', '77722233377', default); 
+insert into telefone values ('16991223388', '88822233366', default); 
+insert into telefone values ('19934271937', '66622233388', default); 
+insert into telefone values ('11934217487', '99922233310', default);
+
+insert into avaliacao values (null, 9, 'Muito bom, adorei o serviço');
+insert into avaliacao values (null, 7, 'Trabalho bem feito, mas demorou muito');
+insert into avaliacao values (null, 5, 'Serviço ficou com falhas');
+insert into avaliacao values (null, 10, 'Excelente');
+insert into avaliacao values (null, 1, 'Me tratou mal e o serviço ficou ruim');
+insert into avaliacao values (null, 7, 'Ficou bom mas poderia ter ficado melhor');
+insert into avaliacao values (null, 9, 'Gostei');
+
+insert into servico values ('2020-11-24', 460, 1, '11122233344', 1);
+insert into servico values ('2020-10-21', 1400, 1, '77722233377', 2);
+insert into servico values ('2020-11-15', 800, 2, '11122233344', 3);
+insert into servico values ('2020-11-24', 2500, 3, '77722233377', 4);
+insert into servico values ('2020-04-24', 400, 3, '88822233366', 5);
+insert into servico values ('2020-04-13', 7600, 4, '77722233377', 6);
+insert into servico values ('2020-04-14', 800, 5, '77722233377', 7);

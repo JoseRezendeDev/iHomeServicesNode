@@ -1,7 +1,7 @@
 const conn = require("./dbConfig");
 
-function getClientes(){
-    conn.query('SELECT * FROM cliente;', function (err, results, fields) {
+async function getClientes(){
+    conn.query('SELECT * FROM cliente;', async function (err, results, fields) {
         if (err) {
             throw err;
         }

@@ -1,15 +1,17 @@
 const clienteRepository = require('../repository/clienteRepository');
 
-function getClientes() {
+async function getClientes() {
     // clienteRepository.getClientes()
     // .then(results => {
     //     console.log("service", results);
     //     return results;
     // })
     // .catch("getClientes falhou");
-    let clientes = clienteRepository.getClientes();
-    console.log("service", clientes);
-    return clientes;
+    clienteRepository.getClientes()
+    .then(clientes => {
+        console.log("service", clientes);
+        return clientes;
+    });
 }
 
 const getClienteById = (id) => {

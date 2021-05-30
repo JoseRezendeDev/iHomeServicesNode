@@ -4,7 +4,7 @@ const clienteService = require('../service/clienteService');
 
 router.get('/', (req, res) => {
     console.log("getClientes");
-    const clientes = clienteService.getClientes();
+    const clientes = await clienteService.getClientes();
     res.send(clientes);
 })
 
