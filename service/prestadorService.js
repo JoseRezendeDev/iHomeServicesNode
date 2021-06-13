@@ -1,20 +1,14 @@
 const prestadorRepository = require('../repository/prestadorRepository');
 
-async function getPrestadores() {
-    prestadorRepository.getPrestadores()
-    .then(prestadores => {
-        console.log("service", prestadores);
-        return prestadores;
-    });
+async function getPrestadoresByCategoriaId(categoriaId) {
+    return await prestadorRepository.getPrestadoresByCategoriaId(categoriaId)
 }
 
-const getPrestadorById = (id) => {
-    let prestador = prestadorRepository.getPrestadorById(id);
-    console.log(prestador);
-    return prestador;
+async function getPrestadorByCpf(cpf) {
+    return await prestadorRepository.getPrestadorById(cpf);
 }
 
 module.exports = {
-    getPrestadores,
-    getPrestadorById
+    getPrestadoresByCategoriaId,
+    getPrestadorByCpf
 };

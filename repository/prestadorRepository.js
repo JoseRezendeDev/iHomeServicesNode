@@ -1,22 +1,17 @@
 const conn = require("./dbConfig");
 
-async function getPrestador(){
-    conn.query('SELECT * FROM prestador JOIN categoria ON prestador.id_categoria = categoria.id;', async function (err, results, fields) {
-        if (err) {
-            throw err;
-        }
-        console.log("repo", results);
-        return results;
-    });
+async function getPrestadoresByCategoriaId(categoriaId){
+    const sql = 'SELECT * FROM prestador WHERE id_categoria = ?;';
+    return await conn.query(sql, categoriaId);
 }
 
-async function getPrestadorById(cpf){
-    const [rows] = await conn.query('SELECT * FROM prestador where cpf = ' + cpf + ';').catch("Query falhou");
-    return rows;
+async function getPrestadorByCpf(cpf){
+    const sql = 'SELECT * FROM prestador where cpf = ?;';
+    return await conn.query(sql, cpf);
 }
 
 module.exports = {
-    getPrestador,
-    getPrestadorById
+    getPrestadoresByCategoriaId,
+    getPrestadorByCpf
 }
 
