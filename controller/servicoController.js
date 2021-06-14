@@ -4,13 +4,19 @@ const servicoService = require('../service/servicoService');
 
 router.get('/', (req, res) => {
     console.log("getServicosByPrestadorCpf");
-    const servicos = await servicoService.getServicosByPrestadorCpf();
+    let servicos;
+    (async () => {
+        servicos = await servicoService.getServicosByPrestadorCpf();
+    })
     res.send(servicos);
 })
 
 router.get('/:id', (req, res) => {
     console.log("getCategorias");
-    const categorias = await servicoService.getCategorias();
+    let categorias;
+    (async () => {
+        categorias = await servicoService.getCategorias();
+    })
     res.send(categorias);
 })
 

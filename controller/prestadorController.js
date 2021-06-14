@@ -4,13 +4,19 @@ const prestadorService = require('../service/prestadorService');
 
 router.get('/categoria/:id', (req, res) => {
     console.log("getPrestadoresByCategoriaId");
-    const prestadores = await prestadorService.getPrestadoresByCategoriaId(id);
+    let prestadores;
+    (async () => {
+        prestadores = prestadorService.getPrestadoresByCategoriaId(req.params.id);
+    })
     res.send(prestadores);
 })
 
 router.get('/:cpf', (req, res) => {
-    console.log("getPrestadoresByCpf");
-    const prestador = prestadorService.getPrestadorByCpf(cpf);
+    console.log("getPrestadorByCpf");
+    let prestador;
+    (async () => {
+        prestador = prestadorService.getPrestadorByCpf(req.params.cpf);
+    })
     res.send(prestador);
 })
 
