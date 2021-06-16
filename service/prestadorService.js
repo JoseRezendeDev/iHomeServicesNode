@@ -1,22 +1,19 @@
 const prestadorRepository = require('../repository/prestadorRepository');
 
-function getPrestadoresByCategoriaId(categoriaId) {
-    return prestadorRepository.getPrestadoresByCategoriaId(categoriaId)
+async function getPrestadoresByCategoriaId(categoriaId) {
+    return await prestadorRepository.getPrestadoresByCategoriaId(categoriaId)
 }
 
-function getPrestadorByCpf(cpf) {
-    const prestador = prestadorRepository.getPrestadorByCpf(cpf);
-    console.log(prestador);
-    return prestador;
-    // prestadorRepository.getPrestadorByCpf(cpf)
-    // .then(results => {
-    //     console.log("service", results);
-    //     return results;
-    // })
-    // .catch("getPrestadorByCpf falhou");
+async function getPrestadorByCpf(cpf) {
+    return await prestadorRepository.getPrestadorByCpf(cpf);
+}
+
+async function getServicosByPrestadorCpf(cpf) {
+    return await prestadorRepository.getServicosByPrestadorCpf(cpf);
 }
 
 module.exports = {
     getPrestadoresByCategoriaId,
-    getPrestadorByCpf
+    getPrestadorByCpf,
+    getServicosByPrestadorCpf
 };

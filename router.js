@@ -14,6 +14,6 @@ router.get('/', function(req, res) {
 
 router.use("/cliente", require('./controller/clienteController'));
 router.use("/prestador", require('./controller/prestadorController'));
-router.use("/servico", require('./controller/servicoController'));
+router.use("/categoria", require('./controller/categoriaController'));
 
 module.exports = router;

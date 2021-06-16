@@ -1,21 +1,11 @@
 const clienteRepository = require('../repository/clienteRepository');
 
-function getClientes() {
-    const clientes = clienteRepository.getClientes();
-    console.log('service', clientes);
-    return clientes;
-    // clienteRepository.getClientes()
-    // .then(results => {
-    //     console.log("service", results);
-    //     return results;
-    // })
-    // .catch("getClientes falhou");
+async function getClientes() {
+    return await clienteRepository.getClientes();
 }
 
-const getClienteById = (id) => {
-    let cliente = clienteRepository.getClienteById(id);
-    console.log(cliente);
-    return cliente;
+async function getClienteById(id) {
+    return await clienteRepository.getClienteById(id);
 }
 
 module.exports = {

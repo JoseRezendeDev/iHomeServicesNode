@@ -1,19 +1,17 @@
-const conn = require("./dbConfig");
+const db = require("./dbConfig");
 
-// tentei por o async nessa function e usar o codigo comentado do service mas tambem nao deu
-function getClientes(){
-    conn.query('SELECT * FROM cliente;', function (err, results, fields) {
-        if (err) {
-            throw err;
-        }
-        console.log("repository", results);
-        return results;
-    });
+async function getClientes(){
+    const sql = 'SELECT * FROM cliente;';
+    const result = await db.query(sql);
+    console.log(result);
+    return result;
 }
 
-function getClienteById(id){
-    const [rows] = conn.query('SELECT * FROM cliente where id = ' + id + ';').catch("Query falhou");
-    return rows;
+async function getClienteById(id){
+    const sql = 'SELECT * FROM cliente where id = ?;';
+    const result = await db.query(sql, id);
+    console.log(result);
+    return result;
 }
 
 module.exports = {
