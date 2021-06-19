@@ -5,6 +5,10 @@ const prestadorService = require('../service/prestadorService');
 router.get('/categoria/:id', async function (req, res) {
     console.log("getPrestadoresByCategoriaId");
     const prestadores = await prestadorService.getPrestadoresByCategoriaId(req.params.id);
+    res.set({
+        "Content-Type": "application/txt",
+        "Access-Control-Allow-Origin": "*",
+    })
     res.send(prestadores);
 });
 
