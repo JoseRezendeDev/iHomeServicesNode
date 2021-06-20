@@ -1,14 +1,12 @@
 var express = require('express');
 var router = express.Router();
 const categoriaService = require('../service/categoriaService');
+const { setHeaderToResponse } = require('./controllerUtils');
 
 router.get('/', async function(req, res) {
     console.log("getCategorias");
     const categorias = await categoriaService.getCategorias();
-    res.set({
-        "Content-Type": "application/txt",
-        "Access-Control-Allow-Origin": "*",
-    })
+    setHeaderToResponse(res);
     res.send(categorias);
 })
 
