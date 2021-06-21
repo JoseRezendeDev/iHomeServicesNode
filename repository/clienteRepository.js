@@ -11,7 +11,7 @@ async function getClienteById(id){
     const sql = 'SELECT * FROM cliente where id = ?;';
     const result = await db.query(sql, id);
     console.log(result);
-    return result;
+    return result[0];
 }
 
 module.exports = {

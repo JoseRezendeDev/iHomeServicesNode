@@ -22,6 +22,14 @@ router.get('/:cpf/servico', async function (req, res) {
     const servicos = await prestadorService.getServicosByPrestadorCpf(req.params.cpf);
     setHeaderToResponse(res);
     res.send(servicos);
-})
+});
+
+router.post('/servico', async function (req, res) {
+    console.log("postServico");
+    console.log(req);
+    const servico = prestadorService.postServico(req.body.servico);
+    setHeaderToResponse(res);
+    res.send(servico);
+});
 
 module.exports = router;

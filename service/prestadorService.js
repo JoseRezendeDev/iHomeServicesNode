@@ -12,8 +12,13 @@ async function getServicosByPrestadorCpf(cpf) {
     return await prestadorRepository.getServicosByPrestadorCpf(cpf);
 }
 
+async function postServico(servico) {
+    return await prestadorRepository.postServico(servico);
+}
+
 module.exports = {
     getPrestadoresByCategoriaId,
     getPrestadorByCpf,
-    getServicosByPrestadorCpf
+    getServicosByPrestadorCpf,
+    postServico
 };

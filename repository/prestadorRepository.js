@@ -21,9 +21,18 @@ async function getServicosByPrestadorCpf(cpf) {
     return result;
 }
 
+async function postServico(servico) {
+    const sql = 'INSERT INTO servico VALUES (?, ?, ?, ?, ?);';
+    const values = [servico.data, servico.preco_total, servico.id_cliente, servico.cpf_prestador, null];
+    const result = await db.query(sql, values);
+    console.log(result);
+    return result;
+}
+
 module.exports = {
     getPrestadoresByCategoriaId,
     getPrestadorByCpf,
-    getServicosByPrestadorCpf
+    getServicosByPrestadorCpf,
+    postServico
 }
 
