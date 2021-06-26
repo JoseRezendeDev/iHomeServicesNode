@@ -15,6 +15,9 @@ i18n.configure({
 
 app.use(i18n.init);
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.use("/", require("./router"));
 
 app.listen(port, () => {
