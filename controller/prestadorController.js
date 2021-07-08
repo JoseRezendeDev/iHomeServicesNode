@@ -24,7 +24,6 @@ router.get('/:cpf/servico', async function (req, res) {
     res.send(servicos);
 });
 
-// esse endpoint POST não ta conseguindo pegar o body da req
 router.post('/servico', async function (req, res) {
     console.log("postServico");
     console.log(req.body);
