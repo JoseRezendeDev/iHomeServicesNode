@@ -22,8 +22,8 @@ async function getServicosByPrestadorCpf(cpf) {
 }
 
 async function postServico(servico) {
-    const sql = 'INSERT INTO servico VALUES (?, ?, ?, ?, ?);';
-    const values = [servico.data, servico.preco_total, servico.id_cliente, servico.cpf_prestador, null];
+    const sql = 'INSERT INTO servico VALUES (?, ?, ?, ?, ?, ?);';
+    const values = [null, servico.data, servico.preco_total, servico.id_cliente, servico.cpf_prestador, null];
     const result = await db.query(sql, values);
     return result;
 }
